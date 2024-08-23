@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            background: url('path/to/black-and-white-nature-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff; /* White text color for readability */
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Subtle text shadow for better readability */
+        }
+        .header {
+            background-color: #000000; /* Solid black background */
+            border-bottom: 1px solid #444; /* Dark border for contrast */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #ffffff;
+        }
+        .header .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .header .nav-links a {
+            text-decoration: none;
+            color: #dddddd; /* Light grey for links */
+            font-weight: 500;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+        .header .nav-links a:hover {
+            color: #ffffff; /* White color on hover */
+            text-decoration: underline;
+        }
+        main {
+            text-align: center; /* Center-align the main content */
+            padding: 20px;
+        }
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center; /* Center-align product items */
+            padding: 20px;
+            backdrop-filter: blur(6px); /* Slight blur effect */
+        }
+        .product-item {
+            border: 1px solid #444; /* Dark border for contrast */
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.9); /* Less opaque white */
+            color: #333; /* Dark text color for better readability */
+            padding: 15px;
+            box-sizing: border-box;
+            flex: 1 1 calc(25% - 20px);
+            max-width: calc(25% - 20px);
+            transition: box-shadow 0.3s, background-color 0.3s;
+        }
+        .product-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Dark shadow for hover effect */
+            background-color: rgba(255, 255, 255, 1); /* Full opacity on hover */
+        }
+        .product-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer; /* Pointer cursor for clickable images */
+        }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-title {
+            color: #333; /* Dark text color for better readability */
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            font-size: 14px;
+            font-weight: normal; /* Normal weight for price text */
+            color: #555; /* Dark grey for price */
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .product-item {
+                flex: 1 1 calc(33.333% - 20px);
+                max-width: calc(33.333% - 20px);
+            }
+        }
+        @media (max-width: 992px) {
+            .product-item {
+                flex: 1 1 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 768px) {
+            .product-item {
+                flex: 1 1 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 576px) {
+            .product-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Product Hub</h1>
+        <nav class="nav-links">
+            <a href="./">Home</a>
+            <a href="./sign-up">Activate License</a>
+            <a href="./sign-in">Sign In</a>
+            <a href="./upgrade">Upgrade</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="section-title">Search Results for "{{ query }}"</h2>
+
+        <h2 class="section-title">Superkicks Products</h2>
+        {% if results_superkicks %}
+            <div class="product-container">
+                {% for product in results_superkicks %}
+                    <div class="product-item">
+                        <a href="{{ product.link }}">
+                            <img src="{{ product.image_url }}" alt="{{ product.title }}" class="product-image">
+                        </a>
+                        <a href="{{ product.link }}" class="product-title">{{ product.title }} - {{ product.color }} - {{ product.price }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No products found on Superkicks.</p>
+        {% endif %}
+
+        <h2 class="section-title">VegNonVeg Products</h2>
+        {% if results_vegnonveg %}
+            <div class="product-container">
+                {% for product in results_vegnonveg %}
+                    <div class="product-item">
+                        <a href="{{ product.link }}">
+                            <img src="{{ product.image_url }}" alt="{{ product.title }}" class="product-image">
+                        </a>
+                        <div class="product-info">
+                            <a href="{{ product.link }}" class="product-title">{{ product.title }}</a>
+                            <p class="product-price">{{ product.price }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No products found on VegNonVeg.</p>
+        {% endif %}
+
+        <h2 class="section-title">Nike Products</h2>
+        {% if results_nike %}
+            <div class="product-container">
+                {% for product in results_nike %}
+                    <div class="product-item">
+                        <a href="{{ product.link }}">
+                            <img src="{% if product.image_url and product.image_url.startswith('http') %}{{ product.image_url }}{% else %}path/to/placeholder/image.png{% endif %}" alt="{{ product.title }}" class="product-image">
+                        </a>
+                        <div class="product-info">
+                            <a href="{{ product.link }}" class="product-title">{{ product.title }} - {{ product.subtitle }}</a>
+                            <p class="product-price">{{ product.price }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No products found on Nike.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
