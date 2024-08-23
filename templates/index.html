@@ -3,10 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Flask on Scalingo</title>
+    <title>The Faster The Better</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        div {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Enhanced shadow */
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6); /* Subtle shadow */
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+            outline: none;
+        }
+
+        button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007BFF;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1.2em;
+            }
+
+            input[type="text"] {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            input[type="text"] {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, Scalingo!</h1>
-    <p>This is a simple Flask application deployed on Scalingo.</p>
+
+<video class="background-video" autoplay loop muted>
+    <source src="{{ url_for('static', filename='us.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<div>
+    <h1>The Faster The Better</h1>
+    <p>Making it simple, Living it better.</p>
+    <form method="POST" action="/">
+        <input type="text" name="search_query" placeholder="Enter search query" required>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
 </body>
 </html>
